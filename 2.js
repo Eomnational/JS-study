@@ -4,19 +4,36 @@
 //1.数组创建和初始化
 
 //Array():创建一个新数组
-let arr1 = new Array(1, 2, 3);
-console.log(arr1);
+// let arr1 = new Array(1, 2, 3);
+// console.log(arr1);
 //输出：[ 1, 2, 3 ]
 
 //Array.of():创建一个新数组
-let arr2 = Array.of(1,2,3);
-console.log(arr2);
+// let arr2 = Array.of(1,2,3);
+// console.log(arr2);
 //输出：[ 1, 2, 3 ]
 
 //Array.from()
-let arr3 =Array.from({length:5},(v,k)=>k+1);
-console.log(arr3);
+// let arr3 =Array.from({length:5},(v,k)=>k+1);
+// console.log(arr3);
 
+
+let arr1=[1,2,3,4,5,6,7,'hello',6,6,7,9];
+
+let arr2=[
+    {
+        id:1,
+        name:'小米',
+        gender:'男',
+        score: 98
+    },
+    {
+        id:2,
+        name:'小红',
+        gender:'女',
+        score: 89
+    }
+];
 //2.增加和删除
 
 //push():尾部添加
@@ -83,7 +100,20 @@ console.log('res lastIndexOf:',res);
 res = arr1.includes(3);
 console.log('res includes:',res);
 
+//find():查找符合条件的某个元素，返回元素对象
+//遍历次数不确定，一找到就立即返回该元素对象
+res= arr2.find(item=>{
+    return item.score>90;
+})
 
+console.log('res find:',res);
+
+//findIndex():查找符合条件的某个元素，返回元素的索引
+res= arr2.findIndex(item=>{
+    return item.score>90;
+})
+
+console.log('res findIndex:',res);
 
 //4.排序
 
@@ -96,5 +126,53 @@ console.log(arr1);
 res=arr1.sort();
 console.log('res sort:',res);
 console.log(arr1);
+
+//根据对象的某个字段排序
+res=arr2.sort((item1,item2)=>{
+    return -item1.score;
+});
+console.log('res sort',res);
+//5.遍历
+
+//forEach():遍历数组,会遍历到数组的每一个元素
+arr2.forEach(item=>{
+    console.log('res id',item.id);
+});
+
+//filter():过滤数组，遍历所有元素，根据某个条件对数组过滤，返回一个新数组，不会影响原数组
+res = arr2.filter(item=>{
+//    if(item.gender==='男'){
+//     return true;
+//    }else{
+//     return false;
+//    }
+    return item.score>90;
+});
+console.log('res filter',res);
+
+
+
+//map():根据原数组,返回一个新数组,此数组元素结构会发生变化
+//回调函数中返回新数组每一个元素
+res =arr2.map(item=>{
+    return { username: item.name };
+})
+console.log('res map',res);
+
+//some():用于查询数组中是否有符合条件的某个元素，有返回true,没有false,找到了就不会继续遍历了
+res=arr2.some(item=>{
+    console.log(item.id);
+    return item.score>90;
+})
+
+console.log('res some',res);
+
+
+//every():用于查询数组中是每一个元素都符合条件，如果都符合返回true,有不符合返回false,一有不符合立即返回不再遍历
+res=arr2.every(item=>{
+   return item.score>90;
+});
+
+console.log('res every',res);
 
 
