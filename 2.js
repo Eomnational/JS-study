@@ -175,4 +175,10 @@ res=arr2.every(item=>{
 
 console.log('res every',res);
 
-
+//reduce():遍历
+let arr3=[1,2,3,4];
+res=arr3.reduce((acc,current)=>{
+    return acc+current;
+},0);
+console.log('res reduce',res);
+console.log('arr3',arr3);
