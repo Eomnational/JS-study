@@ -212,4 +212,67 @@ interface StringArray {
   //交叉类型
 
 
-  //
+  //泛型
+
+
+  //需求：定义一个 print 函数，这个函数的功能是把传入的参数打印出来，再返回这个参数，传入参数的类型是 string，函数返回类型为 string。
+
+//   function print(arg:string):string {
+//         console.log(arg);
+//         return arg;
+//   }
+
+//现在需求变了，我还需要打印 number 类型，怎么办？
+//使用联合类型
+// function print(arg:string | number):string | number {
+//     console.log(arg)
+//     return arg
+// }
+
+//   print('你好');
+
+//泛型基本使用
+type Print = <T>(arg: T) => T
+interface Iprint<T> {
+    (arg: T): T
+}
+
+function print<T>(arg:T):T{
+    console.log(arg);
+    return arg;
+}
+
+print('123');
+
+
+// 希望调用 API 都清晰的知道返回类型是什么数据结构
+
+// interface UserInfo {
+//     name: string
+//     age: number
+// }
+ 
+// function request<T>(url:string): Promise<T> {
+//     return fetch(url).then(res => res.json())
+// }
+ 
+// request<UserInfo>('user/info').then(res =>{
+//     console.log(res);
+    
+// })
+
+//约束泛型
+//假设现在有这么一个函数，打印传入参数的长度
+interface Ilength{
+    length:number,
+}
+function printLength<T extends Ilength >(arg:T):T{
+    console.log(arg.length);
+    return arg;
+}
+
+printLength('123');
+
+
+
+
